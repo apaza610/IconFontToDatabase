@@ -20,3 +20,4 @@ button to save it to the .CSV
 
 - Repeat last step over and over until you finished with all the Glyps.
 ![Alt text](HowItWorks2.jpg?raw=true "Titulo")
+![Alt text](HowItWorks3.jpg?raw=true "Titulo")
