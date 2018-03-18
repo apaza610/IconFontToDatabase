@@ -12,8 +12,8 @@ containing the fields:
 - Description
 
 How to use:
-- Modiffy line 13 to the file.csv you want to use
-- Modiffy line 13 to the FontFile.ttf you want to create tags for 
+- Modify line 13 to the file.csv you want to use
+- Modify line 13 to the FontFile.ttf you want to create tags for 
 - Start the program......
 - The program shows the first Glyph from the font, just write descriptive words for it and click the only 
 button to save it to the .CSV
