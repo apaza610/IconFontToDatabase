@@ -1,7 +1,8 @@
 # coding: utf-8
-
 #####################################################################
-#   llenado de campos de una CSV usando IconFonts
+# Fill csv file while watching the glyphs of a IconFont
+# autor: Homar Richard Orozco Apaza
+# 
 #####################################################################
 
 import tkinter
@@ -13,38 +14,35 @@ raiz.geometry("540x100")
 archivoCSV = open('D:\\cosas\\listaGlyphs.csv','a',encoding='utf-8')    # guardar salida aqui pada DataBase
 miFont = TTFont('d:/cosas/icf_devicon.ttf')                             # creacion de objeto tipo  TTFont
 
-diccioDECHEXglyphs = miFont.getBestCmap()
+diccioDECHEXglyphs = miFont.getBestCmap()                               # dictionary with DEC , HEX values of glyphs
+contador = 3                                                            # to avoid CTRL characters of a font
 
 #------------- Label variable con cada click -------------------------
-contador = 3                                    # para evitar los Glyphs de CTRL del OS
 
-def crearUnicode():
-    global contador
+def crearUnicode(indice):    
     global diccioDECHEXglyphs
-
-    valorINT = list( diccioDECHEXglyphs.keys() )[contador]
+    valorINT = list( diccioDECHEXglyphs.keys() )[indice]
     return chr(valorINT)
 
 def registrar():
     global contador
     global diccioDECHEXglyphs
 
-    valorUnicode = crearUnicode()
-        
-    salidaTexto.config(text=valorUnicode,)          # actualizar el icono de la GUI
-    #print(valorUnicode)
-
+    valorUnicode = crearUnicode(contador)
     valorINT = list( diccioDECHEXglyphs.keys() )[contador]
-    archivoCSV.write("'',"+ valorUnicode +",Nombre_Fuente," + str(valorINT) + "," + descripcion.get() + "\n")        # escribir en los campos del CSV
-    descripcion.delete(0, tkinter.END)                                              # limpiar pantalla para siguiente entrada
+    archivoCSV.write("'',"+ valorUnicode +",Nombre_Fuente," + str(valorINT) + "," + descripcion.get() + "\n")   # escribir en los campos del CSV
     
     contador += 1
+    
+    salidaTexto.config(text=crearUnicode(contador),)    # actualizar el icono de la GUI    
+    descripcion.delete(0, tkinter.END)                  # limpiar pantalla para siguiente entrada
+    
     return
 
 #------------------------- La GUI -------------------------------------------
 tkinter.Label(raiz, text="Describir el Glyph siguiente:").grid(row=0,column=0)
 
-salidaTexto = tkinter.Label(raiz, text=crearUnicode(), font=('icf_devicon',40))
+salidaTexto = tkinter.Label(raiz, text=crearUnicode(contador), font=('icf_devicon',40))
 salidaTexto.grid(row=0,column=10)
 
 #------------ Entrada de acciones de usuario ------------------------
